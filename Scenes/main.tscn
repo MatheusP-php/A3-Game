@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://1ea3rmf8vxv0"]
+
+[ext_resource type="PackedScene" uid="uid://c8cetrweoyvgv" path="res://Scenes/sidewalk.tscn" id="1_deaa7"]
+[ext_resource type="PackedScene" uid="uid://bwaycbrc4euff" path="res://Scenes/player.tscn" id="2_i2tlf"]
+[ext_resource type="PackedScene" uid="uid://c352cpjb8slnr" path="res://Scenes/highway_lane.tscn" id="3_ovksd"]
+[ext_resource type="Script" path="res://Scripts/highway_lanes.gd" id="4_4r3q3"]
+[ext_resource type="Texture2D" uid="uid://dkn60s177tkov" path="res://Assets/Car1.png" id="4_xh3h3"]
+[ext_resource type="Texture2D" uid="uid://bt2qg5sat24m5" path="res://Assets/Car2.png" id="5_rkgid"]
+[ext_resource type="Texture2D" uid="uid://b1ojjehexcr00" path="res://Assets/Car3.png" id="6_o36lt"]
+[ext_resource type="Texture2D" uid="uid://bjmylrthev4gi" path="res://Assets/Car4.png" id="7_ax1ud"]
+[ext_resource type="Texture2D" uid="uid://fwv4seydp6fb" path="res://Assets/Car5.png" id="8_otdvm"]
+
+[node name="main" type="Node"]
+
+[node name="SidewalkBottom" parent="." instance=ExtResource("1_deaa7")]
+position = Vector2(0, 418)
+
+[node name="SideWalkMiddle" parent="." instance=ExtResource("1_deaa7")]
+position = Vector2(0, 34)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_i2tlf")]
+z_index = 1
+position = Vector2(0, 418)
+scale = Vector2(4, 4)
+camera = NodePath("../Camera2D")
+
+[node name="HighwayLanes" type="Node" parent="."]
+script = ExtResource("4_4r3q3")
+
+[node name="HighwayLane" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 364)
+direction = -1
+vehicle_texture = ExtResource("4_xh3h3")
+movement_x_limit = -480
+
+[node name="HighwayLane2" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 300)
+vehicle_texture = ExtResource("5_rkgid")
+vehicle_count = 4
+distance_between_vehicles = 150
+speed = 250
+
+[node name="HighwayLane3" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 236)
+direction = -1
+vehicle_texture = ExtResource("6_o36lt")
+vehicle_count = 2
+distance_between_vehicles = 300
+movement_x_limit = -480
+
+[node name="HighwayLane4" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 172)
+vehicle_texture = ExtResource("7_ax1ud")
+vehicle_count = 4
+distance_between_vehicles = 300
+movement_x_limit = 600
+
+[node name="HighwayLane5" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 108)
+direction = -1
+vehicle_texture = ExtResource("8_otdvm")
+vehicle_count = 2
+distance_between_vehicles = 230
+speed = 160
+movement_x_limit = -480
